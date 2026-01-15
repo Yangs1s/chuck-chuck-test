@@ -1,5 +1,5 @@
 export const PRODUCT_FILTERS = [
-  { label: "전체 상품", value: "all" },
+  { label: "최신순", value: "recent" },
   { label: "인기순", value: "popular" },
   { label: "마감임박", value: "closing" },
 ] as const;

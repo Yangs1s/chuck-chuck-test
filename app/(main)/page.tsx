@@ -1,4 +1,4 @@
-import { ProductContainer } from "./components/main/ProductContain";
+import { ProductContainer } from "./components/main/ProductContainer";
 
 const getData = async () => {
   const res = await fetch("https://api.zeri.pics/");

@@ -2,16 +2,17 @@
 import { useMemo, useState } from "react";
 import { FilterType } from "@/app/constants/product";
 import { ProductProps } from "@/app/types";
-import { FilterBar } from "./FilterBar";
+
 import { ProductList } from "./ProductList";
+import { ProductSortSelect } from "@/app/components/feature/ProductSortSelect";
 
 export function ProductContainer({
   initialContent,
 }: {
   initialContent: ProductProps[];
 }) {
-  const [filter, setFilter] = useState<FilterType>("all");
-
+  const [filter, setFilter] = useState<FilterType>("recent");
+  const dataCount = initialContent.length;
   const sortedData = useMemo(() => {
     const data = [...initialContent];
 
@@ -27,16 +28,25 @@ export function ProductContainer({
           const remainB = b.limit - b.current;
           return remainA - remainB; // 오름차순 (0개 남은게 제일 위로)
         });
-      case "all":
+      case "recent":
       default:
         return data.sort((a, b) => a.index - b.index);
     }
   }, [initialContent, filter]);
   return (
     <div>
-      <div className="flex justify-start bg-secondary border-primary/10 rounded-lg p-4 mb-4">
-        <FilterBar currentFilter={filter} onFilterChange={setFilter} />
+      <div className="flex justify-between items-center  border-primary/10 rounded-lg py-4 ">
+        <div className="flex items-center">
+          <h1 className="text-2xl md:text-2xl font-extrabold text-foreground">
+            진행중인 공동 구매
+          </h1>
+          <span className="text-lg text-primary ml-1">({dataCount}개)</span>
+        </div>
+        {/* <FilterBar currentFilter={filter} onFilterChange={setFilter} /> */}
+        <ProductSortSelect value={filter} onChange={setFilter} />
       </div>
+      {/* seperator */}
+      <div className="w-full h-[1px] mt-2 mb-4 bg-black/10"></div>
       <ProductList content={sortedData} />
     </div>
   );

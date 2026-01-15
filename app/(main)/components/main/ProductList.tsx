@@ -23,11 +23,6 @@ export function ProductList({ content }: { content: ProductProps[] }) {
     <div className="flex flex-col gap-10">
       {/* 1. 판매 중 섹션 (available 배열 사용) */}
       <section>
-        <div className="mb-6 md:mb-8">
-          <h1 className="text-xl md:text-2xl font-bold text-foreground">
-            진행중인 공동 구매
-          </h1>
-        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {visibleAvailableProducts.map((product) => (
             <ProductCard
