@@ -9,7 +9,7 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      <main className="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-8">
+      <main className="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-24 md:pb-8">
         {children}
       </main>
       <Footer />
