@@ -1,9 +1,20 @@
 "use client";
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { FilterType } from "@/app/constants/product";
 import { ProductProps } from "@/app/types";
 import { ProductList } from "./ProductList";
 import { ProductSortSelect } from "@/app/components/feature/ProductSortSelect";
+import { Separator } from "@/app/components/common/Separator";
+
+const PageHeader = memo(function PageHeader() {
+  return (
+    <div className="flex items-center">
+      <h1 className="text-2xl sm:text-3xl md:text-2xl font-extrabold text-foreground">
+        진행중인 공동 구매
+      </h1>
+    </div>
+  );
+});
 
 export function ProductContainer({
   initialContent,
@@ -37,15 +48,11 @@ export function ProductContainer({
   return (
     <div>
       <div className="flex justify-between items-center  border-primary/10 rounded-lg py-4 ">
-        <div className="flex items-center">
-          <h1 className="text-2xl sm:text-3xl md:text-2xl font-extrabold text-foreground">
-            진행중인 공동 구매
-          </h1>
-        </div>
+        <PageHeader />
         <ProductSortSelect value={filter} onChange={setFilter} />
       </div>
       {/* seperator */}
-      <div className="w-full md:h-0.5 mt-2 mb-4 bg-black/10"></div>
+      <Separator className="mt-2 mb-4" />
       <ProductList content={sortedData} />
     </div>
   );
