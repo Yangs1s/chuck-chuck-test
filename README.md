@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🔗 **배포 링크:** [https://chuck-chuck-test.vercel.app/]
 
-## Getting Started
+## 🛠️ 기술 스택 (Tech Stack)
 
-First, run the development server:
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS, shadcn/ui
+- **Optimization:** next/font (local), next/image
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 폴더 구조
+
+```
+chuck-chuck-test/
+├── 📁 app/                        # Next.js App Router
+│   ├── 📁 (main)/                 # 메인 페이지 그룹
+│   │   ├── 📁 components/         # 메인 페이지 전용 컴포넌트
+│   │   │   ├── FilterBar.tsx           # 필터 바
+│   │   │   ├── ProductContainer.tsx    # 상품 컨테이너
+│   │   │   ├── ProductGrid.tsx         # 상품 그리드
+│   │   │   └── ProductList.tsx         # 상품 리스트
+│   │   ├── layout.tsx             # 메인 레이아웃
+│   │   ├── loading.tsx            # 로딩 UI
+│   │   └── page.tsx               # 메인 페이지
+│   │
+│   ├── 📁 components/             # 전역 공통 컴포넌트
+│   │   ├── 📁 common/             # 공통 유틸 컴포넌트
+│   │   │   ├── ImagePlaceholder.tsx    # 이미지 플레이스홀더
+│   │   │   ├── ScrollToTopButton.tsx   # 상단 이동 버튼
+│   │   │   └── Separator.tsx           # 구분선
+│   │   │
+│   │   ├── 📁 feature/            # 기능별 컴포넌트
+│   │   │   ├── ProductCard.tsx          # 상품 카드
+│   │   │   ├── ProductSkeleton.tsx      # 스켈레톤 UI
+│   │   │   ├── ProductSortSelect.tsx    # 정렬 선택
+│   │   │   ├── SoldoutBadge.tsx         # 품절 배지
+│   │   │   └── TimeBadge.tsx            # 타임어택 배지
+│   │   │
+│   │   └── 📁 ui/                 # UI 컴포넌트
+│   │       ├── 📁 Footer/         # 푸터 컴포넌트
+│   │       │   ├── index.tsx           # 푸터 메인
+│   │       │   ├── MobileFooter.tsx    # 모바일 푸터
+│   │       │   └── DeskTopFooter.tsx   # 데스크톱 푸터
+│   │       └── Header.tsx         # 헤더
+│   │
+│   ├── 📁 constants/              # 상수 정의
+│   │   ├── index.ts
+│   │   └── product.ts             # 상품 관련 상수
+│   │
+│   ├── 📁 hooks/                  # Custom Hooks
+│   │   └── useProductDisplay.ts   # 상품 표시 훅
+│   │
+│   ├── 📁 icons/                  # 아이콘 컴포넌트
+│   │   └── ch-logo.tsx            # 척척밥상 로고
+│   │
+│   ├── 📁 lib/                    # 유틸리티 함수
+│   │   └── product.ts             # 상품 관련 함수
+│   │
+│   ├── 📁 types/                  # TypeScript 타입 정의
+│   │   ├── index.ts               # 전역 타입
+│   │   └── product.ts             # 상품 타입
+│   │
+│   ├── layout.tsx                 # Root Layout
+│   ├── globals.css                # 전역 스타일 (Tailwind v4)
+│   └── favicon.ico                # 파비콘
+│
+├── 📁 components/                 # shadcn/ui 컴포넌트
+│   └── 📁 ui/
+│       ├── aspect-ratio.tsx       # 이미지 비율
+│       ├── badge.tsx              # 배지
+│       ├── button.tsx             # 버튼
+│       ├── card.tsx               # 카드
+│       ├── progress.tsx           # 프로그레스 바
+│       ├── select.tsx             # 셀렉트
+│       └── skeleton.tsx           # 스켈레톤 로더
+│
+├── 📁 lib/                        # 라이브러리 유틸
+│   └── utils.ts                   # cn() 등
+│
+├── 📁 public/                     # 정적 파일
+│   ├── 📁 fonts/
+│   │   └── 📁 pretendard/
+│   │       ├── LICENSE.txt
+│   │       └── PretendardVariable.woff2
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+│
+├── 📄 package.json                # 패키지 설정
+├── 📄 tsconfig.json               # TypeScript 설정
+├── 📄 next.config.ts              # Next.js 설정
+├── 📄 eslint.config.mjs           # ESLint 설정
+├── 📄 postcss.config.mjs          # PostCSS 설정
+├── 📄 components.json             # shadcn/ui 설정
+└── 📄 README.md
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 자세한 폴더 역할
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- app/components/feature
+  - 어디든 재사용 될수 있는 독립적인 유닛성격을 띄는 컴포넌트
+- app/(main)/components
+  - 페이지에서 전용적으로 쓰이며, 해당 페이지의 구체적인 맥락, context를 머금고 있는 컴포넌트
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 페이지는 하나지만 (main)으로 그룹화 시킨 이유
 
-## Learn More
+- 구조역할 분담을 명확하게 하기 위해서 입니다.
+  - 일단, 하나만 있지만, 추가로 페이지가 늘어날것을 고려했습니다.
+  - layout.tsx으로 레이아웃을 분리해 확장을 고려했습니다.
+  - 메인 페이지를 담당하는 디렉토리를 만듬으로 응집도를 높여, 협업이나 코드를 수정할 일이 있을때, 찾기 쉽게 구분하는게 맞다고 생각했습니다.
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 설치 및 실행 (Installation)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# 의존성 설치
+npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 개발 서버 실행
+npm run dev
+```

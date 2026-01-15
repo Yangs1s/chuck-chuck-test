@@ -3,12 +3,24 @@ import "./globals.css";
 import localFont from "next/font/local";
 
 const pretendard = localFont({
-  src: "../public/fonts/pretendard/PretendardVariable.woff2",
-  weight: "100 900",
-  style: "normal",
-  variable: "--font-pretendard",
-  preload: true,
+  // src: "../public/fonts/pretendard/PretendardVariable.woff2",
+  // weight: "100 900",
+  src: [
+    {
+      path: "../public/fonts/pretendard/Pretendard-Medium.subset.woff2", // 파일명 확인 필요
+      weight: "400 500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/pretendard/Pretendard-Bold.subset.woff2", // 파일명 확인 필요
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  // style: "normal",
   display: "swap",
+  preload: true,
+  variable: "--font-pretendard",
 });
 
 export const metadata: Metadata = {
