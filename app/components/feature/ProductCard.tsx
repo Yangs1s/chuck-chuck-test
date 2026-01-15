@@ -64,6 +64,7 @@ export function ProductCard({ product }: { product: ProductProps }) {
         </div>
         <div className="flex mt-2 flex-col gap-2 w-full">
           <Progress
+            aria-label={`${Math.floor(progressPercent)}% 달성`}
             value={progressPercent}
             className="h-2 bg-[#f3faf4] [$>div]:bg-primary"
             style={{ "--value": progressPercent } as React.CSSProperties}
