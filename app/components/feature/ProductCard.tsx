@@ -1,10 +1,11 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import ImagePlaceholder from "../common/ImagePlaceholder";
 import { cn } from "@/lib/utils";
 import { ProductProps } from "@/app/types";
+import TimeBadge from "./TimeBadge";
+import SoldoutBadge from "./SoldoutBadge";
 
 export function ProductCard({ product }: { product: ProductProps }) {
   const isSoldOut = product.current >= product.limit;
@@ -12,10 +13,12 @@ export function ProductCard({ product }: { product: ProductProps }) {
     (product.current / product.limit) * 100,
     100,
   );
+  // 공동구매지만 마감이 필요할거 같아서, ui만 달아봤습니다.
+  const isTimeAttack = product.limit - product.current < 10;
   return (
     <Card
       className={cn(
-        "overflow-hidden border-none shadow-sm p-0 gap-0",
+        "overflow-hidden border-none shadow-sm p-0 gap-0 transition-transform duration-300 hover:scale-105 cursor-pointer",
         isSoldOut && "opacity-60 grayscale",
       )}
     >
@@ -30,20 +33,17 @@ export function ProductCard({ product }: { product: ProductProps }) {
         ) : (
           <ImagePlaceholder />
         )}
-        {isSoldOut && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-            <Badge variant="secondary" className="px-4 py-1 text-lg font-bold">
-              품절
-            </Badge>
-          </div>
-        )}
+        {/* 타임어택 배지 */}
+        {!isSoldOut && isTimeAttack && <TimeBadge />}
+        {/* 품절 배지 */}
+        {isSoldOut && <SoldoutBadge />}
       </div>
       <CardContent className="px-4 py-4 md:px-5 md:py-5 flex flex-col gap-1">
         {/* Index는 스크린 리더용이나 디버깅용으로 숨겨두거나 작게 표시 */}
         <p className="text-xs text-slate-400">
           상품번호: #{String(product.index).padStart(3, "0")}
         </p>
-        <h3 className="text-base md:text-lg font-bold truncate leading-tight">
+        <h3 className="font-bold text-base md:text-[20px] line-clamp-2 h-9 md:h-10 text-slate-900">
           {product.name}
         </h3>
         <p className="text-lg md:text-xl font-extrabold text-[#147a46]">

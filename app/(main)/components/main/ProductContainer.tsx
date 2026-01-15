@@ -12,7 +12,8 @@ export function ProductContainer({
   initialContent: ProductProps[];
 }) {
   const [filter, setFilter] = useState<FilterType>("recent");
-  const dataCount = initialContent.length;
+
+  // 데이터 정렬
   const sortedData = useMemo(() => {
     const data = [...initialContent];
 
@@ -33,20 +34,20 @@ export function ProductContainer({
         return data.sort((a, b) => a.index - b.index);
     }
   }, [initialContent, filter]);
+
   return (
     <div>
       <div className="flex justify-between items-center  border-primary/10 rounded-lg py-4 ">
         <div className="flex items-center">
-          <h1 className="text-2xl md:text-2xl font-extrabold text-foreground">
+          <h1 className="text-2xl sm:text-3xl md:text-2xl font-extrabold text-foreground">
             진행중인 공동 구매
           </h1>
-          <span className="text-lg text-primary ml-1">({dataCount}개)</span>
         </div>
         {/* <FilterBar currentFilter={filter} onFilterChange={setFilter} /> */}
         <ProductSortSelect value={filter} onChange={setFilter} />
       </div>
       {/* seperator */}
-      <div className="w-full h-[1px] mt-2 mb-4 bg-black/10"></div>
+      <div className="w-full md:h-0.5 mt-2 mb-4 bg-black/10"></div>
       <ProductList content={sortedData} />
     </div>
   );

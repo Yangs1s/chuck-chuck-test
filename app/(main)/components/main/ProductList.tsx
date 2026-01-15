@@ -17,13 +17,13 @@ export function ProductList({ content }: { content: ProductProps[] }) {
     ? available
     : available.slice(0, INITIAL_PRODUCT_LIMIT);
 
-  // 갯수펴ㅛ시용
+  // 갯수표시용
   const remainingCount = available.length - visibleAvailableProducts.length;
   return (
     <div className="flex flex-col gap-10">
       {/* 1. 판매 중 섹션 (available 배열 사용) */}
       <section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 md:gap-6">
           {visibleAvailableProducts.map((product) => (
             <ProductCard
               key={`${product.name}-${product.index}`}
@@ -72,7 +72,7 @@ export function ProductList({ content }: { content: ProductProps[] }) {
           </div>
 
           {/* 품절 상품 그리드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 opacity-75 grayscale-[0.5]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 md:gap-6">
             {soldOut.map((product) => (
               <ProductCard
                 key={`${product.name}-${product.index}`}
