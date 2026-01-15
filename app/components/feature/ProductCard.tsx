@@ -38,7 +38,8 @@ export const ProductCard = memo(function ProductCard({
             priority={priority}
             src={product.image}
             alt={product.name}
-            className="w-full h-full"
+            className="object-cover"
+            fill
           />
         ) : (
           <ImagePlaceholder />
