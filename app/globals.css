@@ -7,6 +7,9 @@
   /* 커스텀 컬러 직접 정의 */
   --color-primary: #147a46;
   --color-secondary: #f3faf4;
+
+  --font-pretendard: var(--font-pretendard);
+  --font-sans: var(--font-pretendard);
 }
 
 @theme inline {
