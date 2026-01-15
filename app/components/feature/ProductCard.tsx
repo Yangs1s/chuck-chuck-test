@@ -2,11 +2,11 @@ import { memo } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import Image from "next/image";
-import ImagePlaceholder from "../common/ImagePlaceholder";
+import { ImagePlaceholder, ProductProgressBar } from "../common";
 import { cn } from "@/lib/utils";
 import { ProductProps } from "@/app/types";
-import TimeBadge from "./TimeBadge";
-import SoldoutBadge from "./SoldoutBadge";
+import { TimeBadge } from "./TimeBadge";
+import { SoldoutBadge } from "./SoldoutBadge";
 
 // 리렌더링 방지를 위해 memo사용.
 // 하지만, 상품 데이터가 변경되면 리렌더링 되어야 하므로, 부모 컴포넌트에서 key를 변경해줘야 함.
@@ -75,15 +75,7 @@ export const ProductCard = memo(function ProductCard({
         </div>
         <div className="flex mt-2 flex-col gap-2 w-full">
           <div className="flex mt-2 flex-col gap-2 w-full">
-            <div
-              className="h-2 w-full overflow-hidden rounded-full bg-[#f3faf4]"
-              aria-hidden="true"
-            >
-              <div
-                className="h-full bg-primary transition-all duration-300 ease-in-out"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
+            <ProductProgressBar percent={progressPercent} />
           </div>
         </div>
       </CardFooter>

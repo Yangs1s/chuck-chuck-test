@@ -1,5 +1,5 @@
 // app/(main)/components/main/ProductGrid.tsx
-import { ProductCard } from "@/app/components/feature/ProductCard";
+import { ProductCard } from "@/app/components/feature";
 import { ProductProps } from "@/app/types";
 
 // 스타일(ClassName)과 렌더링 책임만 가짐

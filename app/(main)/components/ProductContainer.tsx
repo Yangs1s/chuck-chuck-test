@@ -3,8 +3,8 @@ import { memo, useMemo, useState } from "react";
 import { FilterType } from "@/app/constants/product";
 import { ProductProps } from "@/app/types";
 import { ProductList } from "./ProductList";
-import { ProductSortSelect } from "@/app/components/feature/ProductSortSelect";
-import { Separator } from "@/app/components/common/Separator";
+import { ProductSortSelect } from "@/app/components/feature";
+import { Separator } from "@/app/components/common";
 
 const PageHeader = memo(function PageHeader() {
   return (

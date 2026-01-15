@@ -1,6 +1,6 @@
-import { ProductSkeleton } from "@/app/components/feature/ProductSkeleton";
+import { ProductSkeleton } from "@/app/components/feature";
 import { PRODUCT_SKELETON_LIMIT } from "@/app/constants";
-import { Separator } from "@/app/components/common/Separator";
+import { Separator } from "@/app/components/common";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {

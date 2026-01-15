@@ -1,6 +1,6 @@
 import Header from "../components/ui/Header";
 import Footer from "../components/ui/Footer/index";
-import { ScrollToTopButton } from "../components/common/ScrollToTopButton";
+import { ScrollToTopButton } from "../components/common";
 export default function MainLayout({
   children,
 }: {

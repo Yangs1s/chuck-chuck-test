@@ -6,7 +6,7 @@ interface ImagePlaceholderProps {
   text?: string;
 }
 
-export default function ImagePlaceholder({
+export function ImagePlaceholder({
   className,
   text = "No Image",
 }: ImagePlaceholderProps) {
