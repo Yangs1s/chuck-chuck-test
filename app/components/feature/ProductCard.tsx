@@ -40,6 +40,7 @@ export const ProductCard = memo(function ProductCard({
             alt={product.name}
             className="object-cover"
             fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           />
         ) : (
           <ImagePlaceholder />
