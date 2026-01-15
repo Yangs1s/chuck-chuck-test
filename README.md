@@ -206,6 +206,7 @@ interface ProductProps {
 
 - **폰트 경량화:** 2MB Variable 폰트 → **40KB Subset(경량화) 폰트** 교체
 - **이미지 최적화:** `priority`, `sizes` 속성 적용 및 모바일 뷰포트 기준 **초기 렌더링 개수 제한 (8개 → 4개)**
+- **컴포넌트 직접 제작 :** shadcn으로 만든 프로그레스바 직접 제작;
 
 ### 2. 블로킹 요소 제거 (TBT)
 
