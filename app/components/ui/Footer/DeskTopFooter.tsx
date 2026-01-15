@@ -18,7 +18,7 @@ const DeskTopFooter = () => {
             </div>
             <span className="text-lg font-bold">척척밥상</span>
           </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400">
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-600 dark:text-slate-500">
             <span>상호명: (주)척척밥상</span>
             <span>사업자등록번호: 000-00-00000</span>
             <span>대표자: 이유통</span>

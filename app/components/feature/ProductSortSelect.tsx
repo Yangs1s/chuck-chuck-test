@@ -18,7 +18,10 @@ interface Props {
 export function ProductSortSelect({ value, onChange }: Props) {
   return (
     <Select value={value} onValueChange={(val) => onChange(val as FilterType)}>
-      <SelectTrigger className="md:w-[100px] outline-none bg-inherit shadow-none border-none h-9 text-sm">
+      <SelectTrigger
+        aria-label="정렬 트리거버튼"
+        className="md:w-[100px] outline-none bg-inherit shadow-none border-none h-9 text-sm"
+      >
         {/* 너비와 높이 조절 */}
         <SelectValue placeholder="정렬 기준" />
       </SelectTrigger>

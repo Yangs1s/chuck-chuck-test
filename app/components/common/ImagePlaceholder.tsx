@@ -20,8 +20,8 @@ export default function ImagePlaceholder({
       {/* 1. 시인성을 위해 아이콘을 중앙에 배치
          2. strokeWidth를 1.5로 얇게 주어 세련된 느낌 
       */}
-      <ImageIcon className="w-10 h-10 mb-2 opacity-50" strokeWidth={1.5} />
-      <span className="text-xs font-medium opacity-70">{text}</span>
+      <ImageIcon className="w-10 h-10 mb-2 opacity-70" strokeWidth={1.5} />
+      <span className="text-xs font-medium opacity-80">{text}</span>
     </div>
   );
 }

@@ -40,14 +40,13 @@ export function ProductCard({ product }: { product: ProductProps }) {
       </div>
       <CardContent className="px-4 py-4 md:px-5 md:py-5 flex flex-col gap-1">
         {/* Index는 스크린 리더용이나 디버깅용으로 숨겨두거나 작게 표시 */}
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500">
           상품번호: #{String(product.index).padStart(3, "0")}
         </p>
         <div className="h-9 sm:h-10 flex items-center">
-          {/* [수정] Text: 높이 관련 클래스를 제거하고 말줄임만 담당합니다. */}
-          <h3 className="font-bold text-base md:text-[18px] leading-tight text-slate-900 line-clamp-2 ">
+          <h2 className="font-bold text-base md:text-[18px] leading-tight text-slate-900 line-clamp-2 ">
             {product.name}
-          </h3>
+          </h2>
         </div>
         <p className="text-lg md:text-xl font-extrabold text-[#147a46]">
           {product.price.toLocaleString()}
