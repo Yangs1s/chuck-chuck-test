@@ -14,8 +14,9 @@ export function ProductGrid({
     <div
       className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 md:gap-6 ${opacity ? "opacity-75 grayscale-[0.5]" : ""}`}
     >
-      {products.map((product) => (
+      {products.map((product, index) => (
         <ProductCard
+          priority={index < 4}
           key={`${product.name}-${product.index}`}
           product={product}
         />

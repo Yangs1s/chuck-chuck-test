@@ -12,7 +12,9 @@ import SoldoutBadge from "./SoldoutBadge";
 // 하지만, 상품 데이터가 변경되면 리렌더링 되어야 하므로, 부모 컴포넌트에서 key를 변경해줘야 함.
 export const ProductCard = memo(function ProductCard({
   product,
+  priority = false,
 }: {
+  priority?: boolean;
   product: ProductProps;
 }) {
   const isSoldOut = product.current >= product.limit;
@@ -33,6 +35,7 @@ export const ProductCard = memo(function ProductCard({
       <div className="relative w-full aspect-square">
         {product.image ? (
           <Image
+            priority={priority}
             src={product.image}
             alt={product.name}
             className="w-full h-full"
