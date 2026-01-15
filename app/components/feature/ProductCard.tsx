@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+
 import Image from "next/image";
 import ImagePlaceholder from "../common/ImagePlaceholder";
 import { cn } from "@/lib/utils";
@@ -74,12 +74,17 @@ export const ProductCard = memo(function ProductCard({
           </span>
         </div>
         <div className="flex mt-2 flex-col gap-2 w-full">
-          <Progress
-            aria-label={`${Math.floor(progressPercent)}% 달성`}
-            value={progressPercent}
-            className="h-2 bg-[#f3faf4] [$>div]:bg-primary"
-            style={{ "--value": progressPercent } as React.CSSProperties}
-          />
+          <div className="flex mt-2 flex-col gap-2 w-full">
+            <div
+              className="h-2 w-full overflow-hidden rounded-full bg-[#f3faf4]"
+              aria-hidden="true"
+            >
+              <div
+                className="h-full bg-primary transition-all duration-300 ease-in-out"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+          </div>
         </div>
       </CardFooter>
     </Card>
