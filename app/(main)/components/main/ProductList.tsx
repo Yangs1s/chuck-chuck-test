@@ -1,87 +1,72 @@
+// app/(main)/components/main/ProductList.tsx
 "use client";
 
-import { ProductCard } from "@/app/components/feature/ProductCard";
-import { ProductProps } from "@/app/types";
-import { classifyProducts } from "@/app/lib/product";
-import { useState } from "react";
-import { INITIAL_PRODUCT_LIMIT } from "@/app/constants";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { ProductProps } from "@/app/types";
+import { useProductDisplay } from "@/app/hooks/useProductDisplay"; // 커스텀 훅
+import { ProductGrid } from "./ProductGrid"; // 분리된 컴포넌트
+
 export function ProductList({ content }: { content: ProductProps[] }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  // 1. 로직은 훅에게 위임 (관심사 분리)
+  const {
+    available,
+    soldOut,
+    isExpanded,
+    remainingCount,
+    toggleExpansion,
+    hasMore,
+  } = useProductDisplay(content);
 
-  // data 분류
-  const { available, soldOut } = classifyProducts(content);
-
-  const visibleAvailableProducts = isExpanded
-    ? available
-    : available.slice(0, INITIAL_PRODUCT_LIMIT);
-
-  // 갯수표시용
-  const remainingCount = available.length - visibleAvailableProducts.length;
   return (
     <div className="flex flex-col gap-10">
-      {/* 1. 판매 중 섹션 (available 배열 사용) */}
+      {/* 2. 판매 중 섹션 */}
       <section>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 md:gap-6">
-          {visibleAvailableProducts.map((product) => (
-            <ProductCard
-              key={`${product.name}-${product.index}`}
-              product={product}
-            />
-          ))}
-        </div>
+        <ProductGrid products={available} />
 
-        {!isExpanded && remainingCount > 0 ? (
+        {/* 더보기/접기 버튼 UI */}
+        {(hasMore || isExpanded) && (
           <div className="flex justify-center mt-4">
             <Button
               variant="outline"
               size="lg"
-              className="w-full md:w-auto min-w-[200px] gap-2 font-medium"
-              onClick={() => setIsExpanded(true)}
+              className="cursor-pointer w-full md:w-auto min-w-[200px] text-primary gap-2 font-medium border-primary"
+              onClick={toggleExpansion}
             >
-              상품 전체보기 (+{remainingCount}개)
-              <ChevronDown className="w-4 h-4" />
-            </Button>
-          </div>
-        ) : (
-          <div className="flex justify-center mt-4">
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full md:w-auto min-w-[200px] gap-2 font-medium"
-              onClick={() => setIsExpanded(false)}
-            >
-              상품 접기
-              <ChevronUp className="w-4 h-4" />
+              {isExpanded
+                ? "상품 접기"
+                : `상품 전체보기 (+${remainingCount}개)`}
+              {isExpanded ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
             </Button>
           </div>
         )}
       </section>
 
-      {/* 2. 품절 섹션 (soldOut 배열 사용) - 데이터 있을 때만 렌더링 */}
+      {/* 3. 품절 섹션 */}
       {soldOut.length > 0 && (
         <section className="relative pt-4">
-          {/* 구분선 및 헤더 */}
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px bg-slate-200 flex-1" />
-            <span className="text-slate-400 text-sm font-medium px-2">
-              품절된 상품 ({soldOut.length})
-            </span>
-            <div className="h-px bg-slate-200 flex-1" />
-          </div>
-
-          {/* 품절 상품 그리드 */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 md:gap-6">
-            {soldOut.map((product) => (
-              <ProductCard
-                key={`${product.name}-${product.index}`}
-                product={product}
-              />
-            ))}
-          </div>
+          <SoldOutDivider count={soldOut.length} />
+          <ProductGrid products={soldOut} opacity />
         </section>
       )}
+    </div>
+  );
+}
+
+// 품절 섹션 구분선
+// 재사용성이 없다고 생각해서 하단에 따로 만들었습니다.
+function SoldOutDivider({ count }: { count: number }) {
+  return (
+    <div className="flex items-center gap-4 mb-6">
+      <div className="h-px bg-slate-200 flex-1" />
+      <span className="text-slate-400 text-sm font-medium px-2">
+        품절된 상품 ({count})
+      </span>
+      <div className="h-px bg-slate-200 flex-1" />
     </div>
   );
 }
