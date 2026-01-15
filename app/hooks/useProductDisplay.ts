@@ -1,5 +1,5 @@
 // app/hooks/useProductDisplay.ts
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { ProductProps } from "@/app/types";
 import { classifyProducts } from "@/app/lib/product";
 import { INITIAL_PRODUCT_LIMIT } from "@/app/constants";
@@ -17,15 +17,18 @@ export function useProductDisplay(content: ProductProps[]) {
   const visibleAvailableProducts = isExpanded
     ? available
     : available.slice(0, INITIAL_PRODUCT_LIMIT);
-
+  // 남은 상품 갯수
   const remainingCount = available.length - visibleAvailableProducts.length;
-
+  // 상품 전체보기/접기 버튼 클릭 시 상태 변경
+  const toggleExpansion = useCallback(() => {
+    setIsExpanded((prev) => !prev);
+  }, []);
   return {
     available: visibleAvailableProducts, // 렌더링될 최종 데이터
     soldOut,
     isExpanded,
     remainingCount,
-    toggleExpansion: () => setIsExpanded((prev) => !prev),
+    toggleExpansion,
     hasMore: remainingCount > 0,
   };
 }

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
@@ -7,7 +8,13 @@ import { ProductProps } from "@/app/types";
 import TimeBadge from "./TimeBadge";
 import SoldoutBadge from "./SoldoutBadge";
 
-export function ProductCard({ product }: { product: ProductProps }) {
+// 리렌더링 방지를 위해 memo사용.
+// 하지만, 상품 데이터가 변경되면 리렌더링 되어야 하므로, 부모 컴포넌트에서 key를 변경해줘야 함.
+export const ProductCard = memo(function ProductCard({
+  product,
+}: {
+  product: ProductProps;
+}) {
   const isSoldOut = product.current >= product.limit;
   const progressPercent = Math.min(
     (product.current / product.limit) * 100,
@@ -72,4 +79,4 @@ export function ProductCard({ product }: { product: ProductProps }) {
       </CardFooter>
     </Card>
   );
-}
+});
