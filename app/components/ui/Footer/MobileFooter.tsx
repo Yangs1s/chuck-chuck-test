@@ -1,16 +1,23 @@
+import { Home, List, ShoppingCart, User } from "lucide-react";
 export default function MobileFooter() {
   return (
-    <footer className="bg-secondary-bg dark:bg-[#0a140e] py-10 px-4 md:px-20 lg:px-40 mt-auto border-t border-[#e5e9e7] dark:border-[#1a2a1f]">
-      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row md:items-start justify-between gap-8">
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2 text-primary">
-            <div className="size-6">
-              {/* <ChLogo /> */}
-              mobile Footer
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-sm bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-xl rounded-2xl px-6 py-3 flex items-center justify-between z-20">
+      <button className="flex flex-col items-center text-primary">
+        <Home className="text-2xl" />
+        <span className="text-[10px] font-bold mt-1">홈</span>
+      </button>
+      <button className="flex flex-col items-center text-gray-400 dark:text-gray-500">
+        <List className="text-2xl" />
+        <span className="text-[10px] font-medium mt-1">카테고리</span>
+      </button>
+      <button className="flex flex-col items-center text-gray-400 dark:text-gray-500">
+        <ShoppingCart className="text-2xl" />
+        <span className="text-[10px] font-medium mt-1">장바구니</span>
+      </button>
+      <button className="flex flex-col items-center text-gray-400 dark:text-gray-500">
+        <User className="text-2xl" />
+        <span className="text-[10px] font-medium mt-1">마이페이지</span>
+      </button>
+    </nav>
   );
 }

@@ -43,9 +43,12 @@ export function ProductCard({ product }: { product: ProductProps }) {
         <p className="text-xs text-slate-400">
           상품번호: #{String(product.index).padStart(3, "0")}
         </p>
-        <h3 className="font-bold text-base md:text-[20px] line-clamp-2 h-9 md:h-10 text-slate-900">
-          {product.name}
-        </h3>
+        <div className="h-9 sm:h-10 flex items-center">
+          {/* [수정] Text: 높이 관련 클래스를 제거하고 말줄임만 담당합니다. */}
+          <h3 className="font-bold text-base md:text-[18px] leading-tight text-slate-900 line-clamp-2 ">
+            {product.name}
+          </h3>
+        </div>
         <p className="text-lg md:text-xl font-extrabold text-[#147a46]">
           {product.price.toLocaleString()}
         </p>
@@ -59,11 +62,13 @@ export function ProductCard({ product }: { product: ProductProps }) {
             {product.current}/{product.limit}개
           </span>
         </div>
-        <Progress
-          value={progressPercent}
-          className="h-2 bg-[#f3faf4] [$>div]:bg-primary"
-          style={{ "--value": progressPercent } as React.CSSProperties}
-        />
+        <div className="flex mt-2 flex-col gap-2 w-full">
+          <Progress
+            value={progressPercent}
+            className="h-2 bg-[#f3faf4] [$>div]:bg-primary"
+            style={{ "--value": progressPercent } as React.CSSProperties}
+          />
+        </div>
       </CardFooter>
     </Card>
   );

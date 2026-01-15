@@ -2,7 +2,6 @@
 import { useMemo, useState } from "react";
 import { FilterType } from "@/app/constants/product";
 import { ProductProps } from "@/app/types";
-
 import { ProductList } from "./ProductList";
 import { ProductSortSelect } from "@/app/components/feature/ProductSortSelect";
 
@@ -43,7 +42,6 @@ export function ProductContainer({
             진행중인 공동 구매
           </h1>
         </div>
-        {/* <FilterBar currentFilter={filter} onFilterChange={setFilter} /> */}
         <ProductSortSelect value={filter} onChange={setFilter} />
       </div>
       {/* seperator */}
