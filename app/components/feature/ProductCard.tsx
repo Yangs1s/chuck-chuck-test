@@ -4,15 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import ImagePlaceholder from "../common/ImagePlaceholder";
 import { cn } from "@/lib/utils";
+import { ProductProps } from "@/app/types";
 
-interface ProductProps {
-  current: number;
-  image: null | string;
-  limit: number;
-  name: string;
-  price: number;
-  index: number;
-}
 export function ProductCard({ product }: { product: ProductProps }) {
   const isSoldOut = product.current >= product.limit;
   const progressPercent = Math.min(
@@ -26,7 +19,6 @@ export function ProductCard({ product }: { product: ProductProps }) {
         isSoldOut && "opacity-60 grayscale",
       )}
     >
-      {" "}
       {/* 1. 이미지 공간 확보 (Aspect Ratio) */}
       <div className="relative w-full aspect-square">
         {product.image ? (
@@ -46,20 +38,20 @@ export function ProductCard({ product }: { product: ProductProps }) {
           </div>
         )}
       </div>
-      <CardContent className="px-5 py-5 flex flex-col gap-1">
+      <CardContent className="px-4 py-4 md:px-5 md:py-5 flex flex-col gap-1">
         {/* Index는 스크린 리더용이나 디버깅용으로 숨겨두거나 작게 표시 */}
         <p className="text-xs text-slate-400">
           상품번호: #{String(product.index).padStart(3, "0")}
         </p>
-        <h3 className="text-lg font-bold truncate leading-tight">
+        <h3 className="text-base md:text-lg font-bold truncate leading-tight">
           {product.name}
         </h3>
-        <p className="text-xl font-extrabold text-[#147a46]">
+        <p className="text-lg md:text-xl font-extrabold text-[#147a46]">
           {product.price.toLocaleString()}
         </p>
       </CardContent>
-      <CardFooter className="flex flex-col p-4 pt-0 gap-2">
-        <div className="flex justify-between w-full text-sm font-medium">
+      <CardFooter className="flex flex-col px-4 pb-4 md:px-5 md:pb-5 pt-0 gap-2">
+        <div className="flex justify-between w-full text-xs md:text-sm font-medium">
           <span className="text-[#147a46]">
             {Math.floor(progressPercent)}% 달성
           </span>
