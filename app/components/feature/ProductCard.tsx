@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 import { ProductProps } from "@/app/types";
 import { TimeBadge } from "./TimeBadge";
 import { SoldoutBadge } from "./SoldoutBadge";
+import { isSoldOut } from "@/app/lib/product";
 
 // 리렌더링 방지를 위해 memo사용.
-// 하지만, 상품 데이터가 변경되면 리렌더링 되어야 하므로, 부모 컴포넌트에서 key를 변경해줘야 함.
 export const ProductCard = memo(function ProductCard({
   product,
   priority = false,
@@ -17,7 +17,6 @@ export const ProductCard = memo(function ProductCard({
   priority?: boolean;
   product: ProductProps;
 }) {
-  const isSoldOut = product.current >= product.limit;
   const progressPercent = Math.min(
     (product.current / product.limit) * 100,
     100,
@@ -28,7 +27,7 @@ export const ProductCard = memo(function ProductCard({
     <Card
       className={cn(
         "overflow-hidden border-none shadow-sm p-0 gap-0 transition-transform duration-300 hover:scale-105 cursor-pointer",
-        isSoldOut && "opacity-60 grayscale",
+        isSoldOut(product) && "opacity-60 grayscale",
       )}
     >
       {/* 1. 이미지 공간 확보 (Aspect Ratio) */}
@@ -46,9 +45,9 @@ export const ProductCard = memo(function ProductCard({
           <ImagePlaceholder />
         )}
         {/* 타임어택 배지 */}
-        {!isSoldOut && isTimeAttack && <TimeBadge />}
+        {!isSoldOut(product) && isTimeAttack && <TimeBadge />}
         {/* 품절 배지 */}
-        {isSoldOut && <SoldoutBadge />}
+        {isSoldOut(product) && <SoldoutBadge />}
       </div>
       <CardContent className="px-4 py-4 md:px-5 md:py-5 flex flex-col gap-1">
         {/* Index는 스크린 리더용이나 디버깅용으로 숨겨두거나 작게 표시 */}
